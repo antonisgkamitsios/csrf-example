@@ -43,6 +43,7 @@ app.post('/posts', (req, res) => {
   const loggedInUser = db.users.find((u) => u.id == cookies.user_id);
   if (!loggedInUser) {
     res.status(401).send('Unauthorized');
+    return;
   }
 
   const post = {
