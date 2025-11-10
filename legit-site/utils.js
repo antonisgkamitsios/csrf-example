@@ -7,7 +7,7 @@ export function parseCookieHeader(req) {
   const cookieNameValuePairs = cookieHeader.split(';');
   cookieNameValuePairs.forEach((nameValuePair) => {
     const [name, value] = nameValuePair.split('=');
-    cookies[name.trim()] = value.trim();
+    cookies[name.trim()] = decodeURIComponent(value.trim())
   });
 
   return cookies;
