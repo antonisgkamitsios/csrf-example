@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import { index, login } from './views/index.js';
 import { db } from './db/index.js';
 import { parseCookieHeader } from './utils.js';
+import { csrf } from './csrf.js';
 
 const PORT = 42069;
 
@@ -10,13 +11,17 @@ const app = express();
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 
+app.use(csrf);
+
 app.get('/', (req, res) => {
   const cookies = parseCookieHeader(req);
 
   const loggedInUser = db.users.find((u) => u.id == cookies.user_id);
   const userPosts = db.posts.filter((p) => p.user_id === loggedInUser.id);
 
-  res.send(index(loggedInUser, userPosts));
+  const csrfToken = req.csrf_token;
+
+  res.send(index(loggedInUser, userPosts, csrfToken));
 });
 
 app.get('/login', (req, res) => {

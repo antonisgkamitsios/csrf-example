@@ -1,4 +1,4 @@
-export const index = (loggedInUser, posts) => {
+export const index = (loggedInUser, posts, csrfToken) => {
   return `
     <!DOCTYPE html>
 <html lang="en">
@@ -81,6 +81,7 @@ export const index = (loggedInUser, posts) => {
           <h2>Hello ${loggedInUser.name}</h2>
           <form action="/posts" method="post">
             <input name="title" placeholder="title" required />
+            <input name="csrf_token" value="${csrfToken}" type="hidden" />
             <button type="submit">Create post</button>
           </form>
           ${
