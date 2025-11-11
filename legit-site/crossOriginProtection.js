@@ -1,4 +1,4 @@
-import { SAFE_METHODS } from './legit-site/utils.js';
+import { SAFE_METHODS } from './utils.js';
 
 export function crossOriginProtection(req, res, next) {
   if (SAFE_METHODS.includes(req.method)) {
