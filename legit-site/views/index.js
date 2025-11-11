@@ -87,7 +87,7 @@ export const index = (loggedInUser, posts) => {
             posts.length
               ? `
             <div>Your posts are: </div> 
-            ${posts.map((post) => `<div class="post"><p>${post.title}</p><p>Author: ${loggedInUser.name}</p></div>`)}
+            ${posts.map((post) => `<div class="post"><p>${post.title}</p><p>Author: ${loggedInUser.name}</p></div>`).join(' ')}
               
             `
               : `
