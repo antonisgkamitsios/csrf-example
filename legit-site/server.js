@@ -9,12 +9,13 @@ const PORT = 42069;
 const app = express();
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.get('/', (req, res) => {
   const cookies = parseCookieHeader(req);
 
   const loggedInUser = db.users.find((u) => u.id == cookies.user_id);
-  const userPosts = db.posts.filter((p) => p.user_id === loggedInUser.id);
+  const userPosts = db.posts.filter((p) => p.user_id === loggedInUser?.id);
 
   res.send(index(loggedInUser, userPosts));
 });
@@ -43,6 +44,11 @@ app.post('/posts', (req, res) => {
   const loggedInUser = db.users.find((u) => u.id == cookies.user_id);
   if (!loggedInUser) {
     res.status(401).send('Unauthorized');
+    return;
+  }
+
+  if (!req.body) {
+    res.status(400).send('bad request');
     return;
   }
 
