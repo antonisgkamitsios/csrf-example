@@ -1,3 +1,5 @@
+export const SAFE_METHODS = ['GET', 'HEAD', 'OPTIONS'];
+
 export function parseCookieHeader(req) {
   const cookieHeader = req.headers.cookie;
   if (!cookieHeader) return {};

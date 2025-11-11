@@ -1,10 +1,8 @@
-import { parseCookieHeader } from './utils.js';
+import { parseCookieHeader, SAFE_METHODS } from './utils.js';
 import crypto from 'node:crypto';
 
 const cookieName = 'csrf_token';
 const tokenLen = 32;
-
-const SAFE_METHODS = ['GET', 'HEAD', 'OPTIONS'];
 
 function generateRandomBytes() {
   return crypto.randomBytes(tokenLen);
