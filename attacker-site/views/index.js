@@ -76,10 +76,16 @@ export const index = () => {
     const form = document.querySelector('form');
     const button = document.querySelector('button');
     button.addEventListener('click', ()=>{form.submit()});
-
   </script>
 </body>
 
 </html> 
   `;
 };
+
+// fetch('http://localhost:42069/posts', {
+//   credentials: 'include',
+//   method: 'POST',
+//   headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+//   body: new URLSearchParams({ title: 'Hello from fetch' }),
+// });
